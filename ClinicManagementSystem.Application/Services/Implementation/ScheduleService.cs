@@ -50,7 +50,10 @@ namespace ClinicManagementSystem.Application.Services.Implementation
             _unitOfWork.Schedule.Update(schedule);
             _unitOfWork.Save();
         }
-       
+        public bool CheckScheduleExists(int doctorId, DayOfWeek day)
+        {
+            return _unitOfWork.Schedule.Any(u => u.DoctorId == doctorId && u.DayOfTheWeek == day);
+        }
 
     }
 }

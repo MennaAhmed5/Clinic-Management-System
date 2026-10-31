@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Views\Schedule\Partials\_DeleteScheduleModal.cshtml" />
     <None Include="wwwroot\Images\icon.jpg" />
   </ItemGroup>
 

@@ -15,12 +15,19 @@ namespace ClinicManagementSystem.Infrastructure.Repository
         public IDoctorRepository Doctor { get; private set; }
 
         public IScheduleRepository Schedule { get; private set; }
+
+        public IPatientRepository Patient { get; private set; }
+
+        public IAppointmentRepository Appointment { get; private set;  }
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             Clinic = new ClinicRepository(_db);
             Doctor = new DoctorRepository(_db);
-            Schedule = new ScheduleRepository(_db); 
+            Schedule = new ScheduleRepository(_db);
+            Patient = new PatientRepository(_db);
+            Appointment = new AppointmentRepository(_db);
+
         }
         public void Save()
         {

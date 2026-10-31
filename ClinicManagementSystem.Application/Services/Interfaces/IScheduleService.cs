@@ -17,6 +17,7 @@ namespace ClinicManagementSystem.Application.Services.Interfaces
 
         bool DeleteSchedule(int doctorId, DayOfWeek dayOfWeek);
 
+        public bool CheckScheduleExists(int doctorId, DayOfWeek day);
 
     }
 }

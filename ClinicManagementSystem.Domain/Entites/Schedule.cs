@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,8 +18,9 @@ namespace ClinicManagementSystem.Domain.Entites
         [Required]
         public TimeOnly StartTime { get; set; }
         [Required]
-        public TimeOnly EndTime { get; set; }  
-        
+        public TimeOnly EndTime { get; set; }
+
+        [ValidateNever]
         public Doctor Doctor { get; set; }
 
      }

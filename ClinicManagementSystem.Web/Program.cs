@@ -28,6 +28,8 @@ namespace ClinicManagementSystem.Web
             builder.Services.AddScoped<IDoctorService, DoctorService>();
 
             builder.Services.AddScoped<IScheduleService, ScheduleService>();
+
+            builder.Services.AddScoped<IAppointmentService, AppointmentService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

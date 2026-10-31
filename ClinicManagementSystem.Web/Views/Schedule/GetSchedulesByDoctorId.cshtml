@@ -12,7 +12,7 @@
 <div class="card-body border p-4">
     <div class="row pb-3">
         <div class="col-6 offset-6 text-end">
-            <a asp-controller="Doctor" asp-action="Create" class="btn btn-secondary">
+            <a data-bs-toggle="modal" data-bs-target="#createScheduleModal" class="btn btn-secondary">
                 <i class="bi bi-plus-circle"></i>  Create New Schedule
             </a>
         </div>
@@ -35,13 +35,18 @@
                     <td>@obj.EndTime</td>
                     <td>
                         <div class="w-75 btn-group" role="group">                           
-                            <a asp-action="Update" asp-controller="Schedule" asp-route-dayOfTheWeek="@obj.DayOfTheWeek" asp-route-doctorId="@obj.DoctorId">
+                            @* <a asp-action="Update" asp-controller="Schedule" asp-route-dayOfTheWeek="@obj.DayOfTheWeek" asp-route-doctorId="@obj.DoctorId">
                                 <i class="btn btn-success mx-2">
-                                    <i class="bi bi-pencil-square"></i> Edit
+                                    <i class="bi bi-pencil-square"></i> Update
                                 </i>
-                            </a>
+                            </a> *@
+                            <a class="edit-schedule " data-doctor-id="@obj.DoctorId" data-day="@obj.DayOfTheWeek">                       
+                                        <i class="btn btn-success mx-2">
+                                           <i class="bi bi-pencil-square"></i>  Edit
+                                        </i>
+                              </a>
 
-                            <a asp-action="Delete" asp-controller="Doctor" asp-route-dayOfTheWeek="@obj.DayOfTheWeek" asp-route-doctorId="@obj.DoctorId">
+                            <a class="delete-schedule" data-doctor-id="@obj.DoctorId" data-day="@obj.DayOfTheWeek">
                                 <i class="btn btn-danger mx-2">
                                     <i class="bi bi-trash-fill"></i> Delete
                                 </i>
@@ -60,28 +65,28 @@
             <nav>
                 <ul class="pagination justify-content-end">
                     <li class="page-item @(Model.PaginatedList.PageIndex==1?"disabled":"")">
-                        <a class="page-link text-white" asp-route-pageNumber="1">
+                        <a class="page-link text-white" asp-route-doctorId="@Model.Doctor.Id" asp-route-pageNumber="1">
                             <span>First</span>
                         </a>
                     </li>
                      <li class="page-item @(Model.PaginatedList.HasPreviusPage==false?"disabled":"")">
-                        <a class="page-link text-white" asp-route-pageNumber="@(Model.PaginatedList.PageIndex-1)">
+                        <a class="page-link text-white" asp-route-doctorId="@Model.Doctor.Id" asp-route-pageNumber="@(Model.PaginatedList.PageIndex-1)">
                             <span>Previous</span>
                         </a>
                     </li>
                     @for(int i = 1; i<= Model.PaginatedList.TotalPages; i++){
                         <li class="page-item @(Model.PaginatedList.PageIndex ==i? "active":"")">
-                        <a class="page-link text-white" asp-route-pageNumber="@i">@i</a>                                                    
+                        <a class="page-link text-white" asp-route-doctorId="@Model.Doctor.Id" asp-route-pageNumber="@i">@i</a>                                                    
                         </li>
                     }  
                     
                      <li class="page-item  @(Model.PaginatedList.HasNextPage==false?"disabled":"")">
-                        <a class="page-link text-white" asp-route-pageNumber="@(Model.PaginatedList.PageIndex+1)">
+                        <a class="page-link text-white" asp-route-doctorId="@Model.Doctor.Id" asp-route-pageNumber="@(Model.PaginatedList.PageIndex+1)">
                             <span>Next</span>
                         </a>
                     </li>
                      <li class="page-item @(Model.PaginatedList.PageIndex==Model.PaginatedList.TotalPages?"disabled":"")">
-                        <a class="page-link text-white" asp-route-pageNumber="@(Model.PaginatedList.TotalPages+1)">
+                        <a class="page-link text-white" asp-route-doctorId="@Model.Doctor.Id" asp-route-pageNumber="@(Model.PaginatedList.TotalPages+1)">
                             <span>Last</span>
                         </a>
                     </li>
@@ -90,4 +95,35 @@
             </nav>
         </div>
    </div>
+</div> 
+
+<div class="modal fade" id="createScheduleModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" id="scheduleModalContent">
+
+            <partial name="~/Views/Schedule/Partials/_CreateScheduleModal.cshtml"
+                     model="@Model.createScheduleVM" />
+
+        </div>
+    </div>
 </div>
+
+<div class="modal fade" id="editScheduleModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" id="editScheduleModalContent">          
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteScheduleModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" id="deleteScheduleModalContent">          
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/Schedule.js" asp-append-version="true"></script>
+}

@@ -6,5 +6,7 @@ namespace ClinicManagementSystem.Web.ViewModels
     {
         public Doctor Doctor { get; set; }
         public PaginatedList<Schedule> PaginatedList { get; set; }
+
+        public CreateScheduleVM createScheduleVM { get; set; }
     }
 }
