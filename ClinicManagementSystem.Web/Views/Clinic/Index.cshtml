@@ -1,10 +1,10 @@
-﻿ @model IEnumerable<Clinic>
+﻿ @model PaginatedList<Clinic>
 
 <div class="w-100 card border-0 p-4">
     <div class="card-header bg-success bg-gradient m-lg-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">Clinic List</h2>
+                <h2 class="text-white py-2">Clinics List</h2>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var obj in Model)
+            @foreach (var obj in Model.Items)
             {
                 <tr>
                     <td>@obj.Name</td>
@@ -52,4 +52,42 @@
             }      
         </tbody>
     </table>
+    <div class="row">
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-md-6">
+            <nav>
+                <ul class="pagination justify-content-end">
+                    <li class="page-item @(Model.PageIndex==1?"disabled":"")">
+                        <a class="page-link text-white" asp-route-pageNumber="1">
+                            <span>First</span>
+                        </a>
+                    </li>
+                     <li class="page-item @(Model.HasPreviusPage==false?"disabled":"")">
+                        <a class="page-link text-white" asp-route-pageNumber="@(Model.PageIndex-1)">
+                            <span>Previous</span>
+                        </a>
+                    </li>
+                    @for(int i = 1; i<= Model.TotalPages; i++){
+                        <li class="page-item @(Model.PageIndex ==i? "active":"")">
+                        <a class="page-link text-white" asp-route-pageNumber="@i">@i</a>                                                    
+                        </li>
+                    }  
+                    
+                     <li class="page-item  @(Model.HasNextPage==false?"disabled":"")">
+                        <a class="page-link text-white" asp-route-pageNumber="@(Model.PageIndex+1)">
+                            <span>Next</span>
+                        </a>
+                    </li>
+                     <li class="page-item @(Model.PageIndex==Model.TotalPages?"disabled":"")">
+                        <a class="page-link text-white" asp-route-pageNumber="@(Model.TotalPages+1)">
+                            <span>Last</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+   </div>
 </div>

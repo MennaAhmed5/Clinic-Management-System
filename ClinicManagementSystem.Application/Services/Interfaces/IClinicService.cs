@@ -8,8 +8,8 @@ namespace ClinicManagementSystem.Application.Services.Interfaces
 {
     public interface IClinicService
     {
-        IEnumerable<Clinic> GetAllClinics();
-        Clinic GwtClinicById(int id);
+        IQueryable<Clinic> GetAllClinics();
+        Clinic GetClinicById(int id);
 
         void CreateClinic(Clinic clinic);
 

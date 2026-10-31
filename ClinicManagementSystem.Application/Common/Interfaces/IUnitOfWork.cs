@@ -8,6 +8,10 @@ namespace ClinicManagementSystem.Application.Common.Interfaces
     public interface IUnitOfWork
     {
         public IClinicRepository Clinic { get; }
+        
+        public IDoctorRepository Doctor { get; }   
+        
+        public IScheduleRepository Schedule { get; }
         public void Save();
 
     }

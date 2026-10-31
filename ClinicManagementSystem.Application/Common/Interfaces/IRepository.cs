@@ -7,7 +7,7 @@ namespace ClinicManagementSystem.Application.Common.Interfaces
 {
     public interface IRepository<T> where T : class 
     {
-        IEnumerable<T> GetAll(Expression<Func<T,bool>> filter = null, string? IncludeProperties= null, bool tracked = false);
+        IQueryable<T> GetAll(Expression<Func<T,bool>> filter = null, string? IncludeProperties= null, bool tracked = false);
 
         T Get(Expression<Func<T, bool>>? filter = null, string? IncludeProperties = null, bool tracked = false);
 

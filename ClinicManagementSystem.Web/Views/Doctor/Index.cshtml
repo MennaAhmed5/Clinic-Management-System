@@ -1,0 +1,99 @@
+﻿ @model PaginatedList<Doctor>
+
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Doctors List</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card-body border p-4">
+    <div class="row pb-3">
+        <div class="col-6 offset-6 text-end">
+            <a asp-controller="Doctor" asp-action="Create" class="btn btn-secondary">
+                <i class="bi bi-plus-circle"></i>  Create New Doctor
+            </a>
+        </div>
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Specialization</th>
+                <th>Clinic Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model.Items)
+            {
+                <tr>
+                    <td>@obj.Name</td>
+                    <td>@obj.Phone</td>
+                    <td>@obj.Specialization</td>
+                    <td>@obj.Clinic.Name</td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                             <a asp-action="GetSchedulesByDoctorId" asp-controller="Schedule" asp-route-doctorId="@obj.Id">
+                                <i class="btn btn-warning mx-2">
+                                    <i class="bi bi-clock"></i> Manage Schedules
+                                </i>
+                            </a>
+                            <a asp-action="Update" asp-controller="Doctor" asp-route-doctorId="@obj.Id">
+                                <i class="btn btn-success mx-2">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </i>
+                            </a>
+
+                            <a asp-action="Delete" asp-controller="Doctor" asp-route-doctorId="@obj.Id">
+                                <i class="btn btn-danger mx-2">
+                                    <i class="bi bi-trash-fill"></i> Delete
+                                </i>
+                            </a>                        
+                        </div>
+                    </td>
+                </tr>
+            }      
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-md-6">
+            <nav>
+                <ul class="pagination justify-content-end">
+                    <li class="page-item @(Model.PageIndex==1?"disabled":"")">
+                        <a class="page-link text-white" asp-route-pageNumber="1">
+                            <span>First</span>
+                        </a>
+                    </li>
+                     <li class="page-item @(Model.HasPreviusPage==false?"disabled":"")">
+                        <a class="page-link text-white" asp-route-pageNumber="@(Model.PageIndex-1)">
+                            <span>Previous</span>
+                        </a>
+                    </li>
+                    @for(int i = 1; i<= Model.TotalPages; i++){
+                        <li class="page-item @(Model.PageIndex ==i? "active":"")">
+                        <a class="page-link text-white" asp-route-pageNumber="@i">@i</a>                                                    
+                        </li>
+                    }  
+                    
+                     <li class="page-item  @(Model.HasNextPage==false?"disabled":"")">
+                        <a class="page-link text-white" asp-route-pageNumber="@(Model.PageIndex+1)">
+                            <span>Next</span>
+                        </a>
+                    </li>
+                     <li class="page-item @(Model.PageIndex==Model.TotalPages?"disabled":"")">
+                        <a class="page-link text-white" asp-route-pageNumber="@(Model.TotalPages+1)">
+                            <span>Last</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+   </div>
+</div>

@@ -34,12 +34,12 @@ namespace ClinicManagementSystem.Application.Services.Implementation
             return false;
         }
 
-        public IEnumerable<Clinic> GetAllClinics()
+        public IQueryable<Clinic> GetAllClinics()
         {
             return _unitOfWork.Clinic.GetAll();
         }
 
-        public Clinic GwtClinicById(int id)
+        public Clinic GetClinicById(int id)
         {
             return _unitOfWork.Clinic.Get(u => u.Id == id);
 
@@ -50,5 +50,7 @@ namespace ClinicManagementSystem.Application.Services.Implementation
             _unitOfWork.Clinic.Update(clinic);
             _unitOfWork.Save();
         }
+
+        
     }
 }

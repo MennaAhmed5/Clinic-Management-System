@@ -12,10 +12,15 @@ namespace ClinicManagementSystem.Infrastructure.Repository
         private readonly ApplicationDbContext _db;
         public IClinicRepository Clinic { get; private set; }
 
+        public IDoctorRepository Doctor { get; private set; }
+
+        public IScheduleRepository Schedule { get; private set; }
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             Clinic = new ClinicRepository(_db);
+            Doctor = new DoctorRepository(_db);
+            Schedule = new ScheduleRepository(_db); 
         }
         public void Save()
         {

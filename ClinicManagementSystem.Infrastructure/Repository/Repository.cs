@@ -55,7 +55,7 @@ namespace ClinicManagementSystem.Infrastructure.Repository
 
         }
 
-        public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null, string? IncludeProperties = null, bool tracked = false)
+        public IQueryable<T> GetAll(Expression<Func<T, bool>> filter = null, string? IncludeProperties = null, bool tracked = false)
         {
             IQueryable<T> query;
             if (tracked)
@@ -79,7 +79,7 @@ namespace ClinicManagementSystem.Infrastructure.Repository
                     query = query.Include(includeProp.Trim());
                 }
             }
-            return query.ToList();
+            return query;
         }
 
         public void Remove(T entity)

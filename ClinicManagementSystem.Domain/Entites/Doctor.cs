@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,12 +19,13 @@ namespace ClinicManagementSystem.Domain.Entites
         public string? Specialization { get; set; }
 
         [ForeignKey("Clinic")]
-        public int ClinicId { get; set; }   
-
+        public int ClinicId { get; set; }
+        [ValidateNever]
         public Clinic Clinic { get; set; }
 
+        [ValidateNever]
         public IEnumerable<Schedule> Schedules { get; set; }
-
+        [ValidateNever]
         public IEnumerable<Appointment> Appointments { get; set; }
     }
 }
