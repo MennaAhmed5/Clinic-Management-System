@@ -17,6 +17,10 @@ namespace ClinicManagementSystem.Application.Services.Interfaces
 
         bool DeleteAppointment(int id);
 
-     
+        IQueryable<Appointment> GetAppointmentsBydoctorId(int doctorId);
+
+        List<TimeOnly> GetAvailableTimeSlots(int doctorId, DateOnly date);
+
+
     }
 }

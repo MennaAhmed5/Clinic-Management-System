@@ -11,6 +11,7 @@ namespace ClinicManagementSystem.Application.Services.Interfaces
         IQueryable<Patient> GetAllPatients();
         Patient GetPatientById(int id);
 
+        Patient GetPatientByPhoneNumber(string phoneNumber);
         void CreatePatient(Patient Patient);
 
         void UpdatePatient(Patient Patient);

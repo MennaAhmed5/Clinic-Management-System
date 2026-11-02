@@ -55,5 +55,9 @@ namespace ClinicManagementSystem.Application.Services.Implementation
             return _unitOfWork.Patient.Any(u => u.Phone == PhoneNumber);
         }
 
+        public Patient GetPatientByPhoneNumber(string phoneNumber)
+        {
+            return _unitOfWork.Patient.Get(u => u.Phone == phoneNumber);
+        }
     }
 }

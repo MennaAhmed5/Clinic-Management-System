@@ -36,7 +36,7 @@ namespace ClinicManagementSystem.Web.Controllers
                 Doctor = _doctorService.GetDoctorById(doctorId)
             };
 
-            if(scheduleVM.Doctor  == null)
+            if (scheduleVM.Doctor == null)
             {
                 return RedirectToAction("Error", "Home");
             }
@@ -47,9 +47,9 @@ namespace ClinicManagementSystem.Web.Controllers
         {
             bool IsValidTimeRange = obj.StartTime < obj.EndTime;
             bool ScheduleExist = _scheduleService.CheckScheduleExists(obj.DoctorId, obj.DayOfTheWeek);
-            
 
-            if(ModelState.IsValid&& IsValidTimeRange && !ScheduleExist)
+
+            if (ModelState.IsValid && IsValidTimeRange && !ScheduleExist)
             {
                 var schedule = new Schedule
                 {
@@ -103,7 +103,7 @@ namespace ClinicManagementSystem.Web.Controllers
         public IActionResult Update(CreateScheduleVM obj)
         {
             bool IsValidTimeRange = obj.StartTime < obj.EndTime;
- 
+
             if (ModelState.IsValid && IsValidTimeRange)
             {
                 var schedule = new Schedule
@@ -125,7 +125,7 @@ namespace ClinicManagementSystem.Web.Controllers
             {
                 ModelState.AddModelError("EndTime", "End time must be greater than start time.");
             }
-           
+
             return PartialView(
            "~/Views/Schedule/Partials/_UpdateScheduleModal.cshtml",
            obj);
@@ -167,8 +167,19 @@ namespace ClinicManagementSystem.Web.Controllers
                 success = false,
                 message = "Error..  cannot delete schedule"
             });
-        
-            
+
+
+        }
+        /// <summary>
+        /// this action for enabled and disabled days in the AppointmentDate picker
+        /// </summary>
+        /// <param name="doctorId"></param>
+        /// <returns></returns>
+
+        public IActionResult GetDoctorSchedules(int doctorId)
+        {
+            var schedules = _scheduleService.GetAllSchedules(doctorId).ToList();
+            return Json(new { data = schedules, success = true });
         }
     }
 }

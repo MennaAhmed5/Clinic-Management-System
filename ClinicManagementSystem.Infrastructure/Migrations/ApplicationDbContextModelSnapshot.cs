@@ -44,9 +44,10 @@ namespace ClinicManagementSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorId");
-
                     b.HasIndex("PatientId");
+
+                    b.HasIndex("DoctorId", "AppointmentDate", "AppointmentTime")
+                        .IsUnique();
 
                     b.ToTable("Appointments");
 

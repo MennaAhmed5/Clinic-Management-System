@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,8 +25,10 @@ namespace ClinicManagementSystem.Domain.Entites
         [ForeignKey("Doctor")]
         public int DoctorId { get; set; }
 
+        [ValidateNever]
         public Patient Patient { get; set; }
 
+        [ValidateNever]
         public Doctor Doctor { get; set; }  
 
     }

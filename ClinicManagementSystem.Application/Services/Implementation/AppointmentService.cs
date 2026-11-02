@@ -45,6 +45,35 @@ namespace ClinicManagementSystem.Application.Services.Implementation
 
         }
 
+        public IQueryable<Appointment> GetAppointmentsBydoctorId(int doctorId)
+        {
+            return _unitOfWork.Appointment.GetAll(u=>u.DoctorId == doctorId);
+        }
+
+        public List<TimeOnly> GetAvailableTimeSlots(int doctorId, DateOnly date)
+        {
+            const int duration = 30;
+            //get the doctor schedule 
+            var doctorSchedule = _unitOfWork.Schedule.Get(u => u.DoctorId == doctorId && u.DayOfTheWeek == date.DayOfWeek);
+
+            if (doctorSchedule == null)
+                return new List<TimeOnly>();
+
+            //get booked time slots from  doctor appointment
+            var bookedSlots = _unitOfWork.Appointment.GetAll(u=>u.DoctorId ==doctorId && u.AppointmentDate == date).Select(u => u.AppointmentTime);
+
+            var allSlots = new List<TimeOnly>();
+            
+            //generate all time slots 
+            for (var time = doctorSchedule.StartTime;
+                time.AddMinutes(duration) <= doctorSchedule.EndTime;
+                 time = time.AddMinutes(duration))
+            {
+                allSlots.Add(time);
+            }
+            return allSlots.Except(bookedSlots).ToList();
+        }
+
         public void UpdateAppointment(Appointment appointment)
         {
             _unitOfWork.Appointment.Update(appointment);

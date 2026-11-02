@@ -24,6 +24,13 @@ namespace ClinicManagementSystem.Infrastructure.Data
         {
             // create a composite key 
             modelBuilder.Entity<Schedule>().HasKey(s => new { s.DoctorId, s.DayOfTheWeek });
+            modelBuilder.Entity<Appointment>()
+           .HasIndex(a => new
+           {
+               a.DoctorId,
+               a.AppointmentDate,
+               a.AppointmentTime
+           }).IsUnique();
 
             base.OnModelCreating(modelBuilder);
 
