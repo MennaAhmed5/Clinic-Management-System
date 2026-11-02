@@ -18,6 +18,6 @@ namespace ClinicManagementSystem.Application.Services.Interfaces
 
         bool DeletePatient(int id);
 
-        public bool CheckPhoneNumberExists(string PhoneNumber);
+        public bool CheckPhoneNumberExists(string PhoneNumber, int patientId = 0);
     }
 }

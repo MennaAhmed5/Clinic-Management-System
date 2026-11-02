@@ -33,7 +33,7 @@ namespace ClinicManagementSystem.Web.Controllers
             if (ModelState.IsValid)
             {
                 _ClinicService.CreateClinic(clinic);
-                TempData["success"] = "The Clinic has been created successfully.";
+                TempData["success"] = "The clinic has been created successfully.";
                 return RedirectToAction(nameof(Index));
             }
             return View();
@@ -53,10 +53,10 @@ namespace ClinicManagementSystem.Web.Controllers
             if(ModelState.IsValid &&  obj.Id > 0)
             {
                 _ClinicService.UpdateClinic(obj);
-                TempData["success"] = "The villa has been Updated successfully.";
+                TempData["success"] = "The clinic has been Updated successfully.";
                 return RedirectToAction(nameof(Index));
             }
-            return View();
+            return View(obj);
         }
         public IActionResult Delete(int clinicId)
         {

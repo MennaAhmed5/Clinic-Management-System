@@ -34,13 +34,7 @@
                             <div class="text-muted small fw-bold text-uppercase px-3">
                                 Menu
                             </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Dashboard" asp-action="Index">
-                                <span class="me-2"><i class="bi bi-speedometer2"></i></span>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>        
+                        </li>                             
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Clinic" asp-action="Index">
                                 <span class="me-2"><i class="bi bi-hospital"></i></span>
@@ -54,9 +48,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Schedule" asp-action="Index">
-                                <span class="me-2"><i class="bi bi-clock"></i></span>
-                                <span>Schedules</span>
+                            <a class="nav-link" asp-controller="Appointment" asp-action="Index">
+                                <span class="me-2"><i class="bi bi-clock-history"></i></span>
+                                <span>Appointment</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -65,30 +59,26 @@
                                 <span>Patient</span>
                             </a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Appointment" asp-action="Index" >
-                                <span class="me-2"><i class="bi bi-clock-history"></i></span>
-                                <span>Appointment</span>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </nav>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="d-flex justify-content-between flex-wrap   align-items-center pt-3 pb-2 mb-3 w-100">
+                <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 w-100">
                     <partial name="_Notification" />
                     @RenderBody()
                 </div>
             </main>
+
         </div>
     </div>
-
-    <footer class="border-top footer bg-dark text-muted">
+    <footer class="border-top footer bg-dark text-muted py-3">
         <div class="container text-center">
-            Made with <i class="bi bi-heart-fill"></i> by Menna Ibrahim
+            &copy; @DateTime.Now.Year
+            Clinic Management System. All rights reserved.
         </div>
     </footer>
+
+  
     @* jquery-ajax-unobtrusive@3.2.6 *@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

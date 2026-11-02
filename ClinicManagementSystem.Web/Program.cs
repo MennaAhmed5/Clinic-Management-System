@@ -1,9 +1,12 @@
 using ClinicManagementSystem.Application.Common.Interfaces;
 using ClinicManagementSystem.Application.Services.Implementation;
 using ClinicManagementSystem.Application.Services.Interfaces;
+using ClinicManagementSystem.Domain.Entites;
 using ClinicManagementSystem.Infrastructure.Data;
 using ClinicManagementSystem.Infrastructure.Repository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace ClinicManagementSystem.Web
 {
@@ -21,6 +24,19 @@ namespace ClinicManagementSystem.Web
                 option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                      .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            builder.Services.ConfigureApplicationCookie(option =>
+            {
+                option.AccessDeniedPath = "/Account/AccessDenied";
+                option.LoginPath = "/Account/Login";
+            });
+
+            builder.Services.Configure<IdentityOptions>(option =>
+            {
+                option.Password.RequiredLength = 6;
+            });
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             builder.Services.AddScoped<IClinicService, ClinicService>();
@@ -50,7 +66,7 @@ namespace ClinicManagementSystem.Web
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
+                pattern: "{controller=Clinic}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
             app.Run();

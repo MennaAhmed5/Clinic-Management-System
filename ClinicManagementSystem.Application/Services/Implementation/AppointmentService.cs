@@ -36,7 +36,7 @@ namespace ClinicManagementSystem.Application.Services.Implementation
 
         public IQueryable<Appointment> GetAllAppointments()
         {
-            return _unitOfWork.Appointment.GetAll();
+            return _unitOfWork.Appointment.GetAll(IncludeProperties:"Patient,Doctor");
         }
 
         public Appointment GetAppointmentById(int id)

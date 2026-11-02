@@ -23,9 +23,17 @@ namespace ClinicManagementSystem.Web.Controllers
             _patientService = patientService;
             _scheduleService = scheduleService; 
         }
-        public IActionResult Index()
+        public IActionResult Index(int pageNumber)
         {
-            return View();
+            var appointments = _appointmentService.GetAllAppointments();
+            if (pageNumber < 1)
+            {
+                pageNumber = 1;
+            }
+            int pageSize = 5;
+            var paginatedList = PaginatedList<Appointment>.Create(appointments, pageNumber, pageSize);
+            return View(paginatedList);
+             
         }
        
         public IActionResult Create()
@@ -136,7 +144,23 @@ namespace ClinicManagementSystem.Web.Controllers
             return Json(new { data = availableTimeSlots, success = true });
         }
 
+        [HttpPost]
+        public IActionResult Delete(int appointmentId)
+        {
 
+            bool deleted = _appointmentService.DeleteAppointment(appointmentId);
+            if (deleted)
+            {
+                TempData["success"] = "The appointment has been deleted successfully.";
+                   
+            }
+            else
+            {
+                TempData["error"] = "The appointment could not be deleted";
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
 
     }
 }

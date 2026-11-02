@@ -50,9 +50,9 @@ namespace ClinicManagementSystem.Application.Services.Implementation
             _unitOfWork.Patient.Update(patient);
             _unitOfWork.Save();
         }
-        public bool CheckPhoneNumberExists(string PhoneNumber)
+        public bool CheckPhoneNumberExists(string PhoneNumber, int patientId = 0)
         {
-            return _unitOfWork.Patient.Any(u => u.Phone == PhoneNumber);
+            return _unitOfWork.Patient.Any(u => u.Phone == PhoneNumber && (patientId == 0 || u.Id != patientId));
         }
 
         public Patient GetPatientByPhoneNumber(string phoneNumber)

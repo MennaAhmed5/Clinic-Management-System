@@ -1,0 +1,83 @@
+﻿@model Patient
+
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Update Patient</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="w-100 card-border border p-4">
+
+    <form method="post" class="row" enctype="multipart/form-data">
+        <input asp-for="Id" hidden />
+
+        <div class="col-12">
+            <div class="p-3">
+
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Name" class="form-control border shadow" />
+                    <label asp-for="Name" class="m-2"></label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="DateOfBirth" type="date" class="form-control border shadow" />
+                    <label asp-for="DateOfBirth" class="m-2"></label>
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="Gender"
+                           class="form-label"></label>
+                    <select asp-for="Gender" class="form-select">
+                        <option value="">Select Gender</option>
+                        @foreach (Gender gender in Enum.GetValues(typeof(Gender)))
+                        {
+                            <option value="@gender">@gender</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Phone" class="form-control border shadow" />
+                    <label asp-for="Phone" class="m-2"></label>
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Email" class="form-control border shadow" />
+                    <label asp-for="Email" class="m-2"></label>
+                    <span asp-validation-for="Email" class="text-danger"></span>           
+                </div>
+
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Address" class="form-control border shadow" />
+                    <label asp-for="Address" class="m-2"></label>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="bi bi-check-circle"></i> Update
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Patient" asp-action="Index" class="btn btn-secondary w-100">
+                            <i class="bi bi-x-circle"></i> Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    @{
+        <partial name="_validationScriptsPartial" />
+    }
+}
+
