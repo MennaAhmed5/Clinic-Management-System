@@ -2,11 +2,13 @@
 using ClinicManagementSystem.Application.Services.Interfaces;
 using ClinicManagementSystem.Domain.Entites;
 using ClinicManagementSystem.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace ClinicManagementSystem.Web.Controllers
 {
+    [Authorize]
     public class PatientController : Controller
     {
         private readonly IPatientService _patientService;

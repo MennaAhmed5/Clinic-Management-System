@@ -1,10 +1,12 @@
 ﻿using ClinicManagementSystem.Application.Services.Interfaces;
 using ClinicManagementSystem.Domain.Entites;
 using ClinicManagementSystem.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClinicManagementSystem.Web.Controllers
 {
+    [Authorize]
     public class ClinicController : Controller
     {
         private readonly IClinicService _ClinicService;

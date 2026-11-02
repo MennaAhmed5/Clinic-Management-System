@@ -2,6 +2,7 @@
 using ClinicManagementSystem.Application.Services.Interfaces;
 using ClinicManagementSystem.Domain.Entites;
 using ClinicManagementSystem.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ClinicManagementSystem.Web.Controllers
 {
+    [Authorize]
     public class AppointmentController : Controller
     {
         private readonly IDoctorService _doctorService;

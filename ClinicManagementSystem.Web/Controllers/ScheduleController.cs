@@ -2,11 +2,13 @@
 using ClinicManagementSystem.Application.Services.Interfaces;
 using ClinicManagementSystem.Domain.Entites;
 using ClinicManagementSystem.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ClinicManagementSystem.Web.Controllers
 {
+    [Authorize]
     public class ScheduleController : Controller
     {
         private readonly IScheduleService _scheduleService;
