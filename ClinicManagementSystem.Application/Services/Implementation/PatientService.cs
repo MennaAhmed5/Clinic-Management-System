@@ -52,12 +52,12 @@ namespace ClinicManagementSystem.Application.Services.Implementation
         }
         public bool CheckPhoneNumberExists(string PhoneNumber, int patientId = 0)
         {
-            return _unitOfWork.Patient.Any(u => u.Phone == PhoneNumber && (patientId == 0 || u.Id != patientId));
+            return _unitOfWork.Patient.Any(u => u.Phone.Trim() == PhoneNumber.Trim()&& (patientId == 0 || u.Id != patientId));
         }
 
         public Patient GetPatientByPhoneNumber(string phoneNumber)
         {
-            return _unitOfWork.Patient.Get(u => u.Phone == phoneNumber);
+            return _unitOfWork.Patient.Get(u => u.Phone.Trim() == phoneNumber.Trim());
         }
     }
 }

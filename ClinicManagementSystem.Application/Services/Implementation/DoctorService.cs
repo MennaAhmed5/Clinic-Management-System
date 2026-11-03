@@ -52,7 +52,7 @@ namespace ClinicManagementSystem.Application.Services.Implementation
         }
         public bool CheckPhoneNumberExists(string PhoneNumber, int doctorId=0)
         {
-            return _unitOfWork.Doctor.Any(u => u.Phone == PhoneNumber && u.Id != doctorId);
+            return _unitOfWork.Doctor.Any(u => u.Phone.Trim() == PhoneNumber.Trim() && u.Id != doctorId);
         }
 
     }

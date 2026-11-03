@@ -41,28 +41,28 @@ namespace ClinicManagementSystem.Web.Controllers
             return RedirectToAction("Login", "Account");
 
         }
-        public IActionResult Register(string returnUrl = null)
-        {
-            returnUrl ??= Url.Content("~/");
-            if (!_roleManager.RoleExistsAsync(SD.Role_Admin).GetAwaiter().GetResult())
-            {
-                //create role if not exist
-                _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).Wait();
-                _roleManager.CreateAsync(new IdentityRole(SD.Role_Doctor)).Wait();
+        //public IActionResult Register(string returnUrl = null)
+        //{
+        //    returnUrl ??= Url.Content("~/");
+        //    if (!_roleManager.RoleExistsAsync(SD.Role_Admin).GetAwaiter().GetResult())
+        //    {
+        //        //create role if not exist
+        //        _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).Wait();
+        //        _roleManager.CreateAsync(new IdentityRole(SD.Role_Doctor)).Wait();
 
-            }
-            RegisterVM registerVM = new()
-            {
-                RedirectUrl = returnUrl,
+        //    }
+        //    RegisterVM registerVM = new()
+        //    {
+        //        RedirectUrl = returnUrl,
 
-                RoleList = _roleManager.Roles.Select(x => new SelectListItem
-                {
-                    Text = x.Name,
-                    Value = x.Name
-                })
-            };
-            return View(registerVM);
-        }
+        //        RoleList = _roleManager.Roles.Select(x => new SelectListItem
+        //        {
+        //            Text = x.Name,
+        //            Value = x.Name
+        //        })
+        //    };
+        //    return View(registerVM);
+        //}
 
         //[HttpPost]
         //public async Task<IActionResult> Register(RegisterVM registerVM)

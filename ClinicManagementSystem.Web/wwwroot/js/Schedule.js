@@ -64,26 +64,7 @@ $(document).on('click', '.edit-schedule', function () {
     });
 });
 
-// Open Edit Modal
-$(document).on('click', '.edit-schedule', function () {
-
-    var doctorId = $(this).data('doctor-id');
-    var day = $(this).data('day');
-
-    $.get('/Schedule/Update', {
-        doctorId: doctorId,
-        dayOfTheWeek: day
-    }, function (response) {
-
-        $('#editScheduleModalContent').html(response);
-
-        var modalElement =
-            document.getElementById('editScheduleModal');
-
-        new bootstrap.Modal(modalElement).show();
-    });
-});
-
+ 
 
 // Submit Edit Form
 $(document).on('submit', '#editScheduleModalContent form', function (e) {
