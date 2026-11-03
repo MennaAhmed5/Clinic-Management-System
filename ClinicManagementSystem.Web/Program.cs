@@ -48,6 +48,8 @@ namespace ClinicManagementSystem.Web
             builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 
             builder.Services.AddScoped<IPatientService, PatientService>();
+
+            builder.Services.AddScoped<IDbIntializer, DbIntializer>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -62,7 +64,7 @@ namespace ClinicManagementSystem.Web
             app.UseRouting();
 
             app.UseAuthorization();
-
+            seedDatabase();
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
@@ -70,6 +72,14 @@ namespace ClinicManagementSystem.Web
                 .WithStaticAssets();
 
             app.Run();
+            void seedDatabase()
+            {
+                using (var scope = app.Services.CreateScope())
+                {
+                    var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbIntializer>();
+                    dbInitializer.Intialize();
+                }
+            }
         }
     }
 }
