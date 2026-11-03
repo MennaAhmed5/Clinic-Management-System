@@ -57,7 +57,15 @@ namespace ClinicManagementSystem.Web.Controllers
         public IActionResult Create(CreateAppointmentVM obj)
         {
             if (!ModelState.IsValid)
+            {
+                obj.DoctorsList = _doctorService.GetAllDoctors().Select(u => new SelectListItem()
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                });
                 return View(obj);
+
+            }
 
             // Check if the doctor works on the selected day
             var doctorSchedules = _scheduleService.GetAllSchedules(
@@ -95,11 +103,19 @@ namespace ClinicManagementSystem.Web.Controllers
             }
 
             if (!ModelState.IsValid)
+            {
+                obj.DoctorsList = _doctorService.GetAllDoctors().Select(u => new SelectListItem()
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                });
                 return View(obj);
+
+            }
 
             // Get existing patient
             var patient = _patientService.GetPatientByPhoneNumber(
-                obj.Patient.Phone
+                obj.Patient.Phone.Trim()
             );
 
             // Create patient if not exists

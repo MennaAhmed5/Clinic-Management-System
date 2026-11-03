@@ -98,7 +98,7 @@ namespace ClinicManagementSystem.Web.Controllers
             bool phoneNumberExists = false;
             if (obj.Doctor.Phone != null)
             {
-                phoneNumberExists = _doctorService.CheckPhoneNumberExists(obj.Doctor.Phone, obj.Doctor.Id);
+                phoneNumberExists = _doctorService.CheckPhoneNumberExists(obj.Doctor.Phone.Trim(), obj.Doctor.Id);
             }
 
             if (ModelState.IsValid && !phoneNumberExists)

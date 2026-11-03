@@ -1,7 +1,31 @@
-﻿$('#doctorsDropdown').change(function () {
+﻿$(document).ready(function () {
+
+    // Initialize datepicker when page loads after validation
+    var doctorId = $("#doctorsDropdown").val();
+
+    if (doctorId) {
+        loadDoctorSchedules(doctorId);
+    }
+
+    // Load schedules when doctor changes
+    $("#doctorsDropdown").change(function () {
+        loadDoctorSchedules($(this).val());
+    });
+
+});
+
+
+
+$('#doctorsDropdown').change(function () {
 
     var selectedDoctorId = $(this).val();
+    loadDoctorSchedules(selectedDoctorId);
+   
 
+});
+
+
+function loadDoctorSchedules(selectedDoctorId) {
     $.ajax({
         url: "/Schedule/GetDoctorSchedules?doctorId=" + selectedDoctorId,
         type: "GET",
@@ -13,6 +37,7 @@
                 //Array contains available days for  the selected doctor
                 allowedDays.push(currentElement.dayOfTheWeek);
             });
+            $("#appointmentDate").datepicker("destroy");
 
             $("#appointmentDate").datepicker({
                 dateFormat: "yy-mm-dd",
@@ -33,8 +58,7 @@
         }
 
     });
-
-});
+}
 
 
 //generate time slots based on appointment date 

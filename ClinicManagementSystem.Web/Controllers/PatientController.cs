@@ -43,7 +43,7 @@ namespace ClinicManagementSystem.Web.Controllers
             bool phoneNumberExists = false;
             if (obj.Phone != null)
             {
-                phoneNumberExists = _patientService.CheckPhoneNumberExists(obj.Phone, obj.Id);
+                phoneNumberExists = _patientService.CheckPhoneNumberExists(obj.Phone.Trim(), obj.Id);
             }
 
             if (ModelState.IsValid && obj.Id > 0 && !phoneNumberExists)

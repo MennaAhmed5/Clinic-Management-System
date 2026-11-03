@@ -66,6 +66,8 @@
                                         <option value="@gender">@gender</option>
                                 }
                             </select>
+                        <span asp-validation-for="Patient.Gender"
+                              class="text-danger"></span>
                         </div>
 
                         <div class="col-md-6">
@@ -82,7 +84,9 @@
                                    class="form-label"></label>
                             <input asp-for="Patient.Address"
                                       class="form-control"
-                                      placeholder="Enter patient address"></input>
+                                      placeholder="Enter patient address">
+                        <span asp-validation-for="Patient.Address"
+                              class="text-danger"></span>
                         </div>
 
                     </div>
