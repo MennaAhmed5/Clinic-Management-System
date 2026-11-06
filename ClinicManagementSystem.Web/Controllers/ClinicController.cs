@@ -38,7 +38,7 @@ namespace ClinicManagementSystem.Web.Controllers
                 TempData["success"] = "The clinic has been created successfully.";
                 return RedirectToAction(nameof(Index));
             }
-            return View();
+            return View(clinic);
         }
         public IActionResult Update(int clinicId)
         {

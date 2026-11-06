@@ -86,7 +86,7 @@
                         </a>
                     </li>
                      <li class="page-item @(Model.PaginatedList.PageIndex==Model.PaginatedList.TotalPages?"disabled":"")">
-                        <a class="page-link text-white" asp-route-doctorId="@Model.Doctor.Id" asp-route-pageNumber="@(Model.PaginatedList.TotalPages+1)">
+                        <a class="page-link text-white" asp-route-doctorId="@Model.Doctor.Id" asp-route-pageNumber="@(Model.PaginatedList.TotalPages)">
                             <span>Last</span>
                         </a>
                     </li>
