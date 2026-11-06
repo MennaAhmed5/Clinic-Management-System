@@ -16,6 +16,7 @@ namespace ClinicManagementSystem.Domain.Entites
         public string Name { get; set; }
 
         [Required]
+        [RegularExpression("^01[0125][0-9]{8}$", ErrorMessage = "Invalid Phone Number.")]
         public string? Phone {  get; set; }
 
         public string? Specialization { get; set; }

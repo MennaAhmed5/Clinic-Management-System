@@ -15,6 +15,7 @@ namespace ClinicManagementSystem.Domain.Entites
 
         public string Name { get; set; }
 
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Phone number must contain digits only.")]
         public string? Phone { get; set; }
 
         public string? Address { get; set;  }
