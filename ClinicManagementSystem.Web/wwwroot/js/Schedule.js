@@ -16,7 +16,7 @@ $(document).on('submit', '#scheduleModalContent form', function (e) {
             if (typeof response === 'string') {
                 $('#scheduleModalContent').html(response);
             }
-            // Validation passed: response is JSON
+            // Validation passed: display success message in toastr
             else if (response.success) {
 
                 var modalElement =
@@ -79,10 +79,11 @@ $(document).on('submit', '#editScheduleModalContent form', function (e) {
         data: form.serialize(),
 
         success: function (response) {
-
+            // Validation failed: display partial view
             if (typeof response === 'string') {
                 $('#editScheduleModalContent').html(response);
             }
+            //Validation passed: hide modal and display success message in toastr
             else if (response.success) {
 
                 var modalElement =
@@ -125,7 +126,7 @@ $(document).on('click', '.delete-schedule', function () {
 });
 
 
-// Submit Edit Form
+// Submit Delete Form
 $(document).on('submit', '#deleteScheduleModalContent form', function (e) {
 
     e.preventDefault();
@@ -138,10 +139,11 @@ $(document).on('submit', '#deleteScheduleModalContent form', function (e) {
         data: form.serialize(),
 
         success: function (response) {
-
-            if (typeof response === 'string') {
+            //Validation failed: display partial view
+             if (typeof response === 'string') {
                 $('#deleteScheduleModalContent').html(response);
-            }
+             }
+            //Validation passed: hide modal and display success message in toastr
             else if (response.success) {
 
                 var modalElement =
