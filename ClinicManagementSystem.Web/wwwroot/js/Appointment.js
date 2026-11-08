@@ -16,13 +16,13 @@
 
 
 
-$('#doctorsDropdown').change(function () {
+// $('#doctorsDropdown').change(function () {
 
-    var selectedDoctorId = $(this).val();
-    loadDoctorSchedules(selectedDoctorId);
+//     var selectedDoctorId = $(this).val();
+//     loadDoctorSchedules(selectedDoctorId);
    
 
-});
+// });
 
 
 function loadDoctorSchedules(selectedDoctorId) {
