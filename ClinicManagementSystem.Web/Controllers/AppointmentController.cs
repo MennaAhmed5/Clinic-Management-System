@@ -86,6 +86,7 @@ namespace ClinicManagementSystem.Web.Controllers
                 obj.Appointment.AppointmentTime
             );
 
+      
             if (!isDayAvailable)
             {
                 ModelState.AddModelError(
@@ -129,6 +130,24 @@ namespace ClinicManagementSystem.Web.Controllers
             obj.Appointment.PatientId = patient.Id;
 
             // Save appointment
+
+            bool IsPatienDateAlreadyExist = _appointmentService.checkPatientDate(obj.Appointment.AppointmentDate, obj.Appointment.AppointmentTime, obj.Appointment.PatientId);
+            if (IsPatienDateAlreadyExist)
+            {
+                ModelState.AddModelError("Appointment.AppointmentTime", "invalid appointment time for this patient");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                obj.DoctorsList = _doctorService.GetAllDoctors().Select(u => new SelectListItem()
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                });
+                return View(obj);
+
+            }
+
             try
             {
                 _appointmentService.CreateAppointment(obj.Appointment);

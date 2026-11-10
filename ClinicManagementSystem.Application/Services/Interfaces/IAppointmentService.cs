@@ -21,6 +21,8 @@ namespace ClinicManagementSystem.Application.Services.Interfaces
 
         List<TimeOnly> GetAvailableTimeSlots(int doctorId, DateOnly date);
 
+        bool checkPatientDate(DateOnly appointmentDate, TimeOnly appointmentTime, int patientId);
+
 
     }
 }

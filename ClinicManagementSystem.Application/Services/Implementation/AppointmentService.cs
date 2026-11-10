@@ -80,6 +80,9 @@ namespace ClinicManagementSystem.Application.Services.Implementation
             _unitOfWork.Save();
         }
         
-
+        public bool checkPatientDate(DateOnly appointmentDate, TimeOnly appointmentTime, int patientId)
+        {
+           return _unitOfWork.Appointment.Any(u => u.PatientId == patientId && u.AppointmentDate == appointmentDate && u.AppointmentTime == appointmentTime);
+        }
     }
 }
